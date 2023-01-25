@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1>Game Tembak Burung</h1>
+    <p> <b> Top Score:</b> <span id="topScore"></span></p>
+    <p> <b>Total Waktu:</b> <span id="totalWaktu"></span></p>
+    <img id="bird">
+
+    <script>
+        // untuk agar set sebanyak 5x
+        let counter = 1;
+
+        //menghitung waktu;
+        let start = "";
+        let end = "";
+        let totalWaktu = "";
+
+        // if(localStorage.getItem("topScore") !== null){
+            let topScore = localStorage.getItem("topScore");
+            document.getElementById("topScore").innerHTML = topScore + "s";
+        // }
+
+        tampilGambarRandom();
+        function tampilGambarRandom() {
+            // 1. tampikan gambar random
+            let top = Math.random() * 400;
+            let left = Math.random() * 400;
+
+            // ketika start dapet waktu awalnya nih
+            start = new Date().getTime();
+
+            document.getElementById('bird').src = "bird.png";
+            document.getElementById('bird').style.height = 70 + "px";
+            document.getElementById('bird').style.width = 70 + "px";
+            document.getElementById('bird').style.top = top + "px";
+            document.getElementById('bird').style.left = left + "px";
+            document.getElementById('bird').style.position = "relative";
+            document.getElementById('bird').style.display = "block";
+
+
+        }
+
+        // 2. Kalau burung diclick, ganti gambar jadi bom
+        document.getElementById('bird').onclick = function () {
+            document.getElementById('bird').src = "boom.png";
+            document.getElementById('bird').style.height = 100 + "px";
+            document.getElementById('bird').style.width = 100 + "px";
+
+            //setelah berubah jadi boom, gambarnya hilang setelah 200s
+            setTimeout(sembungikanGambar, 200);
+
+
+            //kalo si counter belum 5 kali terusin aja, kalo udah tampilin alert selesai
+            if (counter < 5) {
+                setTimeout(tampilGambarRandom, 200);
+                counter++;
+            } else {
+                setTimeout(function(){
+                    alert('Selesai');
+                }, 100);
+
+                end = new Date().getTime();
+                totalWaktu = (end - start) / 1000;
+
+                // tampil total waktu di html nya ini
+                document.getElementById("totalWaktu").innerHTML = totalWaktu + "s";
+
+                setTopScore();
+            }
+
+        }
+
+        function sembungikanGambar() {
+            document.getElementById('bird').style.display = "none";
+        }
+
+        function setTopScore() {
+
+            // kalo pertama kali main, topScore nya masih kosong, berrti tampilin total waktu tadi
+            if (localStorage.getItem("topScore") == null) {
+                localStorage.setItem("topScore", totalWaktu);
+                // tampil top score di html nya
+                document.getElementById("topScore").innerHTML = totalWaktu + "s"
+            } else if (totalWaktu < topScore) {
+                localStorage.setItem("topScore", totalWaktu);
+                // tampil top score di html nya
+                document.getElementById("topScore").innerHTML = totalWaktu + "s"
+            }else{
+
+            }
+        }
+    </script>
+</body>
+
+</html>
+<!-- 1. tampilkan gambar burung secara random
+    2. Kalau burung ditembak, ganti gambar jadi bom
+    3. setelah 5 kali tembakan, hitung total waktunya
+    4. set Top score
+ -->

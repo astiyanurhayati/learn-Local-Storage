@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dua 2</title>
+</head>
+<body>
+    <h2>setTimeout</h2>
+    <p>digunakan untk memanggil fungsi setelah x miliseconds</p>
+    <p>intinya ngedelay fungsi gitu</p>
+    <p>1 second = 1000 miliseconds</p>
+    <h1 id="show1"></h1>
+    <h1 id="show2"></h1>
+    <h1 id="show3"></h1>
+
+    <script>
+        //syntax setTimeout
+        // setTimeout(namaFungsi, milisecond);
+
+        function tampilkanText1(){
+           const show1 = document.getElementById("show1");
+           show1.innerHTML = "Halo Astiya Nurhayati"
+
+        }
+
+        function tampilkanText2(){
+           const show1 = document.getElementById("show2");
+           show1.innerHTML = "Apa Kabar?"
+
+        }
+        function tampilkanText3(){
+           const show1 = document.getElementById("show3");
+           show1.innerHTML = "Makan Yokk"
+
+        }
+        
+        
+        //kalo pake setTimeout jadi delay dulu selama 2 detik baru perintah di functionnya tampil
+        setTimeout( tampilkanText1, 1000);
+        setTimeout( tampilkanText2, 2000);
+        setTimeout( tampilkanText3, 3000);
+        
+
+    </script>
+</body>
+</html>
